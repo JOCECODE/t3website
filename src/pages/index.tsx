@@ -9,6 +9,8 @@ const Home: NextPage = (props) => {
 
   const user = useUser();
 
+  const { data }  = api.posts.getAll.useQuery();
+
   return (
     <>
       <Head>
@@ -25,7 +27,9 @@ const Home: NextPage = (props) => {
 </SignInButton>}
 {!!user.isSignedIn && <SignOutButton/>}
       </div>
-      
+      <div>
+        {data?.map((post) => (<div key={post.id}>{post.content}</div>))}
+      </div>
       </main>
     </>
   );
